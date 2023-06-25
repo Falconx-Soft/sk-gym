@@ -1,0 +1,73 @@
+{% load static %}
+
+<!-- Search Bar -->
+<div class="panel panel-default">
+  <div class="panel-body">
+    <form method="get" action="{% url 'home' %}" class="search-form">
+      <div class="panel-body text-center">
+        <h4 style="color: rgb(245, 99, 75)">All Members</h4>
+      </div>
+      <div class="input-group-custom">
+        <input
+          type="text"
+          name="query"
+          placeholder="Search member"
+          class="form-control"
+          {% if query %}
+          value="{{ query }}"
+          {% endif %}
+        />
+        <div class="input-group-append">
+          <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<br />
+
+<div class="grid-container">
+  {% for member in page_obj %}
+
+  <div class="member-card">
+    <img src="{{ member.profile_pic.url }}"  class="card-img-top member-card-image"  alt="Profile Picture"/>
+    <hr />
+    <div class="member-details">
+      <div>
+        <h5 class="member-name">Member Name: {{ member.username }}</h5>
+        <p class="member-email">Email: {{ member.email }}</p>
+        <p class="member-phone">Phone: {{ member.phone }}</p>
+        <p class="member-phone">Blood Group: {{ member.blood_group }}</p>
+        <p class="member-amount">Amount: {{ member.fee_amount }}</p>
+        <p class="member-fee">Fee Paid: {% if member.is_fee_paid %}&#10004;{% else %}&#10006;{% endif %}</p>
+        <p class="member-active">Active: {% if member.is_active %}&#10004;{% else %}&#10006;{% endif %}</p>
+        <p class="member-date">Date: {{ member.due_date }}</p>
+  
+      </div>
+
+     
+      <div class="delete-button-container">
+        <a class="btn btn-primary btn-user btn-block" href="{% url 'deleteMember' member.id %}">
+          Delete Member
+        </a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% if page_obj.has_other_pages %}
+<div class="pagination">
+  {% if page_obj.has_previous %}
+  <a href="?page=1">First</a>
+  <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+  {% endif %} {% for num in page_obj.paginator.page_range %}
+  {% if page_obj.number == num %}
+  <a class="active">{{ num }}</a>
+  {% else %}
+  <a href="?page={{ num }}">{{ num }}</a>
+  {% endif %} {% endfor %} {% if page_obj.has_next %}
+  <a href="?page={{ page_obj.next_page_number }}">Next</a>
+  <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+  {% endif %}
+</div>
+{% endif %}

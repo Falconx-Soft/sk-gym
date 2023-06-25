@@ -1,0 +1,65 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+<main class="container" style="background-color:  rgb(249, 246, 246)">
+  <h1 class="h1 text-gray-900 mb-4 text-center" style="padding-top: 5%; color: white  !important;">
+    Shapes In Gym ! <br /><small style="color: rgb(245, 99, 75)">Sweat more, bleed less!.</small>
+  </h1>
+  <br>
+  <br>
+  <h4 class="register-heading text-center">Register a New Member!</h4>
+  <div class="row text-center">
+    <div id="cameraContainer" class="col-md-6 offset-md-3">
+      <video id="cameraFeed" autoplay></video>
+      <button id="captureButton" class="btn btn-primary btn-user btn-block">Capture Image</button>
+    </div>
+    <div id="previewContainer" class="col-md-6 offset-md-3" style="display: none;">
+      <canvas id="previewCanvas" width="300" height="300"></canvas>
+      <button id="saveButton" class="btn btn-primary btn-user btn-block">Save Image</button>
+    </div>
+  </div>
+</main>
+
+<script>
+  const cameraContainer = document.getElementById('cameraContainer');
+  const cameraFeed = document.getElementById('cameraFeed');
+  const captureButton = document.getElementById('captureButton');
+  const previewContainer = document.getElementById('previewContainer');
+  const previewCanvas = document.getElementById('previewCanvas');
+  const saveButton = document.getElementById('saveButton');
+
+  // Access the user's camera
+  navigator.mediaDevices.getUserMedia({ video: true })
+    .then(stream => {
+      cameraFeed.srcObject = stream;
+    })
+    .catch(error => {
+      console.error('Error accessing camera: ', error);
+    });
+
+  // Capture an image from the camera
+  captureButton.addEventListener('click', () => {
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+    canvas.width = cameraFeed.videoWidth;
+    canvas.height = cameraFeed.videoHeight;
+    context.drawImage(cameraFeed, 0, 0, canvas.width, canvas.height);
+
+    // Display the captured image in the preview container
+    previewCanvas.getContext('2d').drawImage(canvas, 0, 0, previewCanvas.width, previewCanvas.height);
+    cameraContainer.style.display = 'none';
+    previewContainer.style.display = 'block';
+  });
+
+  // Save the captured image
+  saveButton.addEventListener('click', () => {
+    const imageBase64 = previewCanvas.toDataURL('image/jpeg');
+    
+    // Send the imageBase64 to the server using AJAX or form submission
+    // ...
+
+    // Redirect to the home page after saving the image
+    window.location.href = '/myauth/home.html';
+  });
+</script>
+{% endblock %}

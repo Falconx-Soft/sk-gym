@@ -1,0 +1,140 @@
+ .container{
+  max-width: 100% !important;
+ }
+ .grid-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 20px;
+        }
+  .all-member-cards{
+    flex-direction: column;
+  }
+
+  .member-card {
+      background-color: #f2f2f2;
+      padding: 20px;
+      border-radius: 5px;
+  }
+
+  .member-card h3 {
+      margin-top: 0;
+  }
+
+  .member-card p {
+      margin-bottom: 0;
+  }
+
+  .pagination {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+  }
+
+  .pagination a {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 0 4px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+    color: black;
+  }
+
+  .pagination .active {
+    background-color: #f5634b;
+    color: white;
+  }
+  .revenue-card {
+    border: 2px solid black;
+    border-radius: 5px;
+    background-color: rgb(245, 99, 75);
+    color: black;
+    padding: 10px;
+    /* width: 300px; */
+  }
+  
+  .card-header {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .card-body {
+    text-align: center;
+  }
+  
+  .revenue-amount {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .revenue-description {
+    text-align: center;
+  }
+  .member-card-image{
+    height: 250px !important;
+    object-fit: cover !important;
+  }
+  .member-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Make the card take the full height */
+  }
+  
+  .member-details {
+    flex-grow: 1; /* Make the member details div take remaining space */
+    margin-bottom: 10px; /* Add some bottom margin */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+  }
+  
+  .delete-button-container {
+    margin-top: auto; /* Push the container to the bottom */
+  }
+.search-form{
+  display: flex;
+  justify-content: space-between;
+}
+.input-group-custom{
+  display: flex;
+}
+.form-control{
+  height: 100% !important;
+}
+
+/* Revenue Card */
+  .form-card {
+  background-color: #333333;
+  padding: 20px;
+  border-radius: 4px;
+}
+
+label {
+  color: white;
+}
+
+input[type="date"] {
+  background-color: rgb(224, 187, 187);
+  color: black;
+  border: none;
+  padding: 8px;
+  border-radius: 4px;
+  width: 100%;
+}
+
+button[type="submit"] {
+  background-color: #f5634b;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+}
+.fee_amount_input{
+  width: 100%;
+}
+.form-row-register{
+  justify-content: space-between;
+}

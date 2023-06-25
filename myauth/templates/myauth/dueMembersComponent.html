@@ -1,0 +1,91 @@
+{% extends 'main.html' %} 
+{% load static %}
+ {% block content %}
+<!-- main -->
+
+<!-- main -->
+<!-- main -->
+<main class="container" style="background-color: black">
+  <h1 class="h1 text-gray-900 mb-4 text-center" style="padding-top: 5%; color: white  !important;">
+    SK gym - blinka <br /><small style="color: rgb(245, 99, 75)">Sweat more, bleed less!.</small>
+  </h1>
+<br>
+  <div class="panel-body text-center">
+    <h4 style="color: rgb(245, 99, 75)">Total Members with due fees : {{ page_obj.paginator.count }}</h4>
+</div>
+<br>
+
+<div class="grid-container">
+  {% for member in page_obj %}
+
+  <div class="member-card">
+    <img
+      src="{{ member.profile_pic.url }}"
+      class="card-img-top member-card-image"
+      alt="Profile Picture"
+    />
+    <hr />
+    <div class="member-details">
+      <div>
+        <h5 class="member-name">Member Name: {{ member.username }}</h5>
+        <p class="member-email">Email: {{ member.email }}</p>
+        <p class="member-phone">Phone: {{ member.phone }}</p>
+        <p class="member-amount">Amount: {{ member.fee_amount }}</p>
+        <p class="member-phone">Blood Group: {{ member.blood_group }}</p>
+        <p class="member-fee">Fee Paid: {% if member.is_fee_paid %}&#10004;{% else %}&#10006;{% endif %}</p>
+        <p class="member-active">Active: {% if member.is_active %}&#10004;{% else %}&#10006;{% endif %}</p>
+        <p class="member-date">Date: {{ member.due_date }}</p>
+  
+      </div>
+
+      <div class="delete-button-container">
+        <form method="POST" action="{% url 'getFeePaid' member.id %}">
+          {% csrf_token %}
+          <input type="number" name="fee_amount" class="fee_amount_input" placeholder="Enter Fee Amount" required>
+          <button type="submit" class="btn btn-primary btn-user btn-block">Mark Fee Paid</button>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% if page_obj.has_other_pages %}
+<div class="pagination">
+  {% if page_obj.has_previous %}
+  <a href="?page=1">First</a>
+  <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+  {% endif %} {% for num in page_obj.paginator.page_range %}
+  {% if page_obj.number == num %}
+  <span class="active">{{ num }}</span>
+  {% else %}
+  <a href="?page={{ num }}">{{ num }}</a>
+  {% endif %} {% endfor %} {% if page_obj.has_next %}
+  <a href="?page={{ page_obj.next_page_number }}">Next</a>
+  <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+  {% endif %}
+</div>
+{% endif %}
+
+{% endblock %}
+<!-- <div class="member-list-container">
+{% for due_member in due_members %}
+    <div class="member-card">
+        <img src="{{due_member.profile_pic.url}}" class="card-img-top" alt="Profile Picture">
+        <div class="member-details">
+          <h5 class="member-name">Member Name: {{ due_member.username }}</h5>
+          <p class="member-email">Email: {{ due_member.email }}</p>
+          <p class="member-phone">Phone: {{ due_member.phone }}</p>
+          <p class="member-amount">Amount: {{ due_member.fee_amount }}</p>
+          <p class="member-fee">Fee Paid: {{ due_member.is_fee_paid }}</p>
+          <p class="member-active">Active: {{ due_member.is_active }}</p>
+          <p class="member-date">Due Date: {{ due_member.due_date }}</p>
+          <hr>
+          <a class="btn btn-primary btn-user btn-block" href="{% url 'getFeePaid' due_member.id %}">Mark Fee Paid</a>
+        </div>
+      </div>
+      <hr>
+
+{% endfor %}
+</div> -->
+<!-- ./feed -->

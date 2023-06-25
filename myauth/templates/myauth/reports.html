@@ -1,0 +1,34 @@
+{% extends 'main.html' %} {% load static %} {% block content %}
+
+<!-- main -->
+<main class="container" style="background-color: black">
+  <h1 class="h1 text-gray-900 mb-4 text-center" style="padding-top: 5%; color: white  !important;">
+    Shapes In Gym ! <br /><small style="color: rgb(245, 99, 75)">Sweat more, bleed less!.</small>
+  </h1>
+<br>
+<br>
+<!-- <h4 class="register-heading text-center">Reports</h4> -->
+<div class="container" style="max-width: 50%; padding-top: 5%;">
+  <div class="form-card">
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button class="btn btn-primary btn-user btn-block" type="submit">Submit</button>
+    </form>
+  </div>
+
+  <hr><hr>
+  <p style="color: rgb(245, 99, 75); font-size: 20pt;">Total revenue</p>
+
+  <div class="revenue-card">
+    <div class="card-header">
+      <h5>Revenue</h5>
+    </div>
+    <div class="card-body">
+      <p class="revenue-amount">${{total_revenue}}</p>
+      <p class="revenue-description">Total revenue earned</p>
+    </div>
+  </div>
+
+</div>
+ {% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'main.html' %} 
+{% load static %}
+ {% block content %}
+<!-- main -->
+
+<!-- main -->
+<!-- main -->
+<main class="container" style="background-color: black">
+  <h1 class="h1 text-gray-900 mb-4 text-center" style="padding-top: 5%; color: white  !important;">
+    SK gym - blinka <br /><small style="color: rgb(245, 99, 75)">Sweat more, bleed less!.</small>
+  </h1>
+<br>
+  <div class="panel-body text-center">
+    <h4 style="color: rgb(245, 99, 75)">Total Active Members: {{ members|length }}</h4>
+</div>
+<br>
+
+    <div class="row all-member-cards">
+        <!-- <div class="panel-body">
+          <h4 style="color: rgb(245, 99, 75)"> All Members</h4>
+        </div> -->
+        {% include 'myauth/feedComponent.html' %}
+      
+    </div>
+    
+  </main>
+  <!-- ./main -->
+
+<!-- ./main -->
+{% endblock %}

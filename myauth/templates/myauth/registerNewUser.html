@@ -1,0 +1,42 @@
+{% extends 'main.html' %} {% load static %} {% block content %}
+
+<!-- main -->
+<main class="container" style="background-color: black">
+  <h1 class="h1 text-gray-900 mb-4 text-center" style="padding-top: 5%; color: white  !important;">
+    Shapes In Gym ! <br /><small style="color: rgb(245, 99, 75)">Sweat more, bleed less!.</small>
+  </h1>
+<br>
+<br>
+<h4 class="register-heading text-center">Register a New Member!</h4>
+<div class="row text-center">
+            <form method="POST" action="" enctype="multipart/form-data" class="my-form" style="padding-top: 5%;
+            padding-left: 35%">
+              {% csrf_token %}
+              {% for field in form %}
+              <div class="form-row form-row-register">
+                <div class="">
+                    <div class="form-group">
+                        <label for="room_name" class="form-label">{{field.label}}</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="form-control-user">{{field}}</div>
+                    </div>
+                </div>
+            </div>
+              {% endfor %}
+          
+              <div class="form-group">
+                  <input class="btn btn-primary btn-user btn-block" type="submit" name="register" value="Register" />
+              </div>
+          </form>
+
+        </div>
+    </div>
+</div>
+
+</main>
+<!-- ./main -->
+
+{% endblock %}
