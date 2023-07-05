@@ -1,10 +1,8 @@
 {% extends 'main.html' %} {% load static %} {% block content %}
 
 <!-- main -->
-<main class="container" style="background-color: black">
-  <h1 class="h1 text-gray-900 mb-4 text-center" style="padding-top: 5%; color: white  !important;">
-    Shapes In Gym ! <br /><small style="color: rgb(245, 99, 75)">Sweat more, bleed less!.</small>
-  </h1>
+<main class="container pl-0">
+  {% include 'myauth/hero.html' %}
 <br>
 <br>
 <!-- <h4 class="register-heading text-center">Reports</h4> -->
@@ -18,11 +16,11 @@
   </div>
 
   <hr><hr>
-  <p style="color: rgb(245, 99, 75); font-size: 20pt;">Total revenue</p>
+  <!-- <p style="color: #040b14; font-size: 20pt;">Total revenue</p> -->
 
   <div class="revenue-card">
     <div class="card-header">
-      <h5>Revenue</h5>
+      <h5> Total Revenue</h5>
     </div>
     <div class="card-body">
       <p class="revenue-amount">${{total_revenue}}</p>

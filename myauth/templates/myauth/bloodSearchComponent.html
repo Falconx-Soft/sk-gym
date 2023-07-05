@@ -5,7 +5,7 @@
   <div class="panel-body">
     <form method="get" action="{% url 'bloodGroup' %}" class="search-form">
       <div class="panel-body text-center">
-        <h4 style="color: rgb(245, 99, 75)">All Members</h4>
+        <h4 style="color: #149ddd">All Members ({{ page_obj.paginator.count }})</h4>
       </div>
       <div class="input-group-custom">
 
@@ -49,7 +49,7 @@
 
       <hr />
       <a
-        class="btn btn-primary btn-user btn-block"
+        class="btn delete-btn btn-user btn-block"
         href="{% url 'deleteMember' member.id %}"
         >Delete Member</a
       >

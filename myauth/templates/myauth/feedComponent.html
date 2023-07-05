@@ -5,7 +5,7 @@
   <div class="panel-body">
     <form method="get" action="{% url 'home' %}" class="search-form">
       <div class="panel-body text-center">
-        <h4 style="color: rgb(245, 99, 75)">All Members</h4>
+        <h4 style="color: #149ddd">All Members ({{ members|length }})</h4>
       </div>
       <div class="input-group-custom">
         <input
@@ -34,7 +34,7 @@
     <hr />
     <div class="member-details">
       <div>
-        <h5 class="member-name">Member Name: {{ member.username }}</h5>
+        <h5 class="member-name">{{ member.username|title }}</h5>
         <p class="member-email">Email: {{ member.email }}</p>
         <p class="member-phone">Phone: {{ member.phone }}</p>
         <p class="member-phone">Blood Group: {{ member.blood_group }}</p>
@@ -47,7 +47,7 @@
 
      
       <div class="delete-button-container">
-        <a class="btn btn-primary btn-user btn-block" href="{% url 'deleteMember' member.id %}">
+        <a class="btn delete-btn btn-user btn-block" href="{% url 'deleteMember' member.id %}">
           Delete Member
         </a>
       </div>

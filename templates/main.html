@@ -1,45 +1,36 @@
 <!DOCTYPE html>
 {% load static %}
 <html>
-  <head>
-    <title>Shapes In</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}"
-  />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{% static 'vendor/fontawesome-free/css/all.min.css' %}"
-    />
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{% static 'css/sb-admin-2.min.css' %}"
-    />
-  </head>
-  <body id="page-top">
 
-    <!-- Page Wrapper -->
-    <div id="wrapper">
+<head>
+  <title>Shapes In</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" />
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/sb-admin-2.min.css' %}" />
+</head>
+
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
     {% if request.user.is_authenticated %}
     {% include 'navbar.html' %}
     {% endif %}
     <!-- ./nav -->
     {% block content %} {% endblock %}
-</div>
-    <!-- footer -->
-    <footer class="container text-center">
-      <ul class="nav nav-pills pull-right">
-        <!-- <li>FaceBookClone - Made by {{request.user.username}}</li> -->
-      </ul>
-    </footer>
-    <!-- ./footer -->
-    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/scriptjs' %}"></script>
-  </body>
+  </div>
+  <!-- footer -->
+  <footer class="container text-center">
+    <ul class="nav nav-pills pull-right">
+      <!-- <li>FaceBookClone - Made by {{request.user.username}}</li> -->
+    </ul>
+  </footer>
+  <!-- ./footer -->
+  <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/scriptjs' %}"></script>
+</body>
+
 </html>
-
-
-

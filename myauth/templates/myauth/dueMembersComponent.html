@@ -5,14 +5,8 @@
 
 <!-- main -->
 <!-- main -->
-<main class="container" style="background-color: black">
-  <h1 class="h1 text-gray-900 mb-4 text-center" style="padding-top: 5%; color: white  !important;">
-    SK gym - blinka <br /><small style="color: rgb(245, 99, 75)">Sweat more, bleed less!.</small>
-  </h1>
-<br>
-  <div class="panel-body text-center">
-    <h4 style="color: rgb(245, 99, 75)">Total Members with due fees : {{ page_obj.paginator.count }}</h4>
-</div>
+<main class="container pl-0" >
+  {% include 'myauth/hero.html' %}
 <br>
 
 <div class="grid-container">

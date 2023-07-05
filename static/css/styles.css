@@ -43,13 +43,13 @@
   }
 
   .pagination .active {
-    background-color: #f5634b;
+    background-color: #149ddd;
     color: white;
   }
   .revenue-card {
-    border: 2px solid black;
+    /* border: 2px solid black; */
     border-radius: 5px;
-    background-color: rgb(245, 99, 75);
+    background-color: white;
     color: black;
     padding: 10px;
     /* width: 300px; */
@@ -80,6 +80,8 @@
     display: flex;
     flex-direction: column;
     height: 100%; /* Make the card take the full height */
+    background-color: white !important;
+    color: #040b14 !important;
   }
   
   .member-details {
@@ -107,13 +109,14 @@
 
 /* Revenue Card */
   .form-card {
-  background-color: #333333;
+  background-color: white;
   padding: 20px;
   border-radius: 4px;
+  color: #040b14;
 }
 
 label {
-  color: white;
+  color: #040b14;
 }
 
 input[type="date"] {
@@ -126,7 +129,7 @@ input[type="date"] {
 }
 
 button[type="submit"] {
-  background-color: #f5634b;
+  background-color: #149ddd;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -137,4 +140,41 @@ button[type="submit"] {
 }
 .form-row-register{
   justify-content: space-between;
+}
+
+#accordionSidebar{
+  position: fixed;
+  background: #040b14;
+}
+main{
+  background: #f5f8fd;
+  margin-left: 14rem !important;
+}
+
+
+#hero {
+    background-attachment: fixed !important;
+}
+#hero {
+    width: 100%;
+    height: 70vh;
+    background: url(../images/hero_bg.jpg) top center;
+    background-size: cover;
+}
+
+.pl-20percent{
+  padding-left: 20% !important;
+}
+.delete-btn{
+  background-color: #149ddd !important;
+  color: #ddd !important;
+}
+
+.register-btn{
+  background-color: #149ddd !important;
+  color: #ddd !important;
+}
+
+.sidebar-dark .nav-item .nav-link:active, .sidebar-dark .nav-item .nav-link:focus, .sidebar-dark .nav-item .nav-link:hover {
+  color: #149ddd !important;
 }
