@@ -7,8 +7,8 @@
     <div class="layout__box">
       <div class="layout__boxHeader">
         <div class="layout__boxTitle">
-          <a href="{{request.META.HTTP_REFERER}}">
-            <h6>Back</h6>
+          <a href="{{request.META.HTTP_REFERER}}" class="text-decoration-none">
+            <h6 class="back_btn" >&larr; Back</h6>
             <!-- <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
               <title>arrow-left</title>
               <path
@@ -23,7 +23,7 @@
         <form class="del-form" method="POST" action="">
           {% csrf_token %}
           <div class="del-form__group">
-            <p class="text-white">Are you sure you want to delete "{{member.username}}" ?</p>
+            <p >Are you sure you want to delete "{{member.username}}" ?</p>
           </div>
           <div class="de-lfor__group">
             <input class="btn del-btn--main" type="submit" value="Confirm" />

@@ -178,12 +178,47 @@ main{
   background-color: #149ddd !important;
   color: #ddd !important;
 }
+.delete-btn:hover{
+  opacity: 0.7 !important;
+}
 
 .register-btn{
   background-color: #149ddd !important;
   color: #ddd !important;
 }
+.register-btn:hover{
+  opacity: 0.7;
+}
 
 .sidebar-dark .nav-item .nav-link:active, .sidebar-dark .nav-item .nav-link:focus, .sidebar-dark .nav-item .nav-link:hover {
   color: #149ddd !important;
+}
+.delete-item.layout{
+  width: 100%;
+}
+.layout__box {
+  background-color: #f2f2f2 !important;
+  color: #040b14 !important;
+  box-shadow: 0 0 10px rgba(0, 0, 255, 0.1);
+}
+.layout__boxTitle a {
+  color: #040b14 !important;
+}
+.delete-item.layout {
+  background: #f5f8fd !important;
+}
+.del-btn--main {
+  background-color: #149ddd !important;
+  color: white !important;
+  float: right;
+}
+.del-btn--main:hover {
+  background-color: #040b14 !important;
+}
+.back_btn{
+  color: #149ddd; font-size: 12px;
+}
+.back_btn:hover{
+  color: #040b14 !important; 
+  text-decoration: none !important;
 }
