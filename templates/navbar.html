@@ -1,10 +1,40 @@
 {% load static %}
+<style>
+  .profile img {
+    margin: 15px auto;
+    display: block;
+    width: 120px;
+    border: 8px solid #2c2f3f;
+}
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+.profile h1 {
+    font-size: 24px;
+    margin: 0;
+    padding: 0;
+    font-weight: 600;
+    -moz-text-align-last: center;
+    text-align-last: center;
+    font-family: "Poppins", sans-serif;
+}
+.profile h1 a:hover{
+  text-decoration: none;
+  color: #149ddd !important;
+}
+</style>
 <ul
   class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
   id="accordionSidebar"
 >
   <!-- Sidebar - Brand -->
-  <a
+  <div class="profile mb-2">
+    <img src="../static/images/unknown_profile_pic.jpg" alt="" class="img-fluid rounded-circle">
+    <h1 class="text-white"><a href="{% url 'home' %}" class="text-white">{{request.user.username|title}}</a></h1>
+    
+  </div>
+  <!-- <a
     class="sidebar-brand d-flex align-items-center justify-content-center"
     href="{% url 'home' %}"
   >
@@ -12,7 +42,7 @@
       <i class="fas fa-user"></i>
     </div>
     <div class="sidebar-brand-text mx-3">@{{request.user.username}}</div>
-  </a>
+  </a> -->
 
   <!-- Divider -->
   <hr class="sidebar-divider my-0" />
