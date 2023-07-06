@@ -22,6 +22,7 @@ from datetime import timedelta
 from django.utils import timezone
 from django.core.paginator import Paginator
 User = get_user_model()
+from django.shortcuts import get_object_or_404
 
 @login_required(login_url="loginPage")
 def home(request):
@@ -268,7 +269,7 @@ def dueMembers(request):
                             due_members.append(member)
                         
                     else:
-                        print('Hello, it\'s time to pay the fee: ' + member.username)
+                        pass
                 if member.is_fee_paid == 0:
                     if members not in due_members:
                         due_members.append(member)
@@ -297,3 +298,33 @@ def bloodGroup(request):
 
     context={'page_obj':page_obj}
     return render(request, "myauth/bloodGroup.html",context)
+
+
+
+def edit_member(request, instance_id):
+    instance = get_object_or_404(User, id=instance_id)
+    
+    if request.method == 'POST':
+        form = MemberForm(request.POST or None, request.FILES or None, instance=instance)
+        if form.is_valid():
+            form.save()
+    form = MemberForm(instance=instance)
+    member=User.objects.get(id=instance_id)
+    if member.fee_amount and member.fee_amount != '0.0':
+        print('Fees Paid')
+        today = datetime.now()
+        member.is_fee_paid=True
+        member.is_active=True
+        member.fee_paid_date=timezone.now()
+        if member.due_date is not None:
+            due_date=member.due_date
+            due_date = due_date + relativedelta(months=1)
+        else:
+            due_date = today + relativedelta(months=1)
+        member.due_date=due_date
+        member.save()
+    context = {
+        'form': form,
+        'instance': instance,
+    }
+    return render(request, 'myauth/edit_member.html', context)

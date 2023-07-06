@@ -11,4 +11,5 @@ urlpatterns=[
     path('deletemember/<str:pk>', deleteMember, name="deleteMember"),
     path('dueMembers/', dueMembers, name="dueMembers"),
     path('bloodGroup/', bloodGroup, name="bloodGroup"),
+    path('edit_member/<int:instance_id>/', edit_member, name='edit_member'),
 ]

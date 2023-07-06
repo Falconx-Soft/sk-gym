@@ -31,13 +31,13 @@
   {% for member in page_obj %}
 
   <div class="member-card">
-    <img
-      src="{{ member.profile_pic.url }}"
-      class="card-img-top member-card-image"
-      alt="Profile Picture"
-    />
+    {% if member.profile_pic %}
+    <img src="{{ member.profile_pic.url }}"  class="card-img-top member-card-image"  alt="Profile Picture"/>
+    {% else %}
+    <img src="{% static 'images/unknown_profile_pic.jpg' %}"  class="card-img-top member-card-image"  alt="Profile Picture"/>
+    {% endif %}
     <hr />
-    <div class="member-details">
+    <div class="member-details" onclick="window.location.href='{% url 'edit_member' member.id %}'">
       <h5 class="member-name">Member Name: {{ member.username }}</h5>
       <p class="member-email">Email: {{ member.email }}</p>
       <p class="member-phone">Phone: {{ member.phone }}</p>

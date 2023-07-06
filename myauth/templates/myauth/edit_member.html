@@ -1,0 +1,49 @@
+{% extends 'main.html' %} {% load static %} {% block content %}
+<style>
+    .full-width input[type="text"],
+    .full-width input[type="password"],
+    .full-width input[type="email"],
+    .full-width select,
+    .full-width textarea {
+        width: 100%;
+    }
+</style>
+<!-- main -->
+<main class="container pl-0">
+  <h1 class="h1 text-gray-900 mb-4 text-center" style="padding-top: 5%; color: #149ddd  !important;">
+    Shapes In Gym ! <br /><small style="color: #149ddd">Sweat more, bleed less!.</small>
+  </h1>
+<br>
+<br>
+<h4 class="register-heading text-center">Edit the Member</h4>
+<div class="row text-center justify-content-center">
+            <form method="POST" action="" enctype="multipart/form-data" class="my-form p-4 mb-3" style="box-shadow: 0 0 10px rgba(0, 0, 255, 0.1); width: 70%;">
+              {% csrf_token %}
+              {% for field in form %}
+              <div class="form-row form-row-register mx-0">
+                <div class="">
+                    <div class="form-group">
+                        <label for="room_name" class="form-label">{{field.label}}</label>
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="form-group">
+                        <div class="form-control-user {% if field.field.widget.input_type != 'checkbox' %}full-width{% endif %}" style="text-align: initial;">{{field}}</div>
+                    </div>
+                </div>
+            </div>
+              {% endfor %}
+          
+              <div class="form-group">
+                  <input class="btn register-btn btn-block" type="submit" name="register" value="Submit" />
+              </div>
+          </form>
+
+        </div>
+    </div>
+</div>
+
+</main>
+<!-- ./main -->
+
+{% endblock %}

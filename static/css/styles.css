@@ -94,6 +94,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    cursor: pointer !important;
 
   }
   
@@ -165,10 +166,17 @@ main{
     background-attachment: fixed !important;
 }
 #hero {
-    width: 100%;
-    height: 70vh;
-    background: url(../images/hero_bg.jpg) top center;
-    background-size: cover;
+    /* width: 100%;
+    height: 10vh; */
+    /* background: url(../images/hero_bg.jpg) top center; */
+    /* background-size: cover; */
+    margin-bottom: 30px;
+}
+.hero_title{
+  font-family: "Poppins", sans-serif;
+    font-weight: 600 !important;
+    padding-top: 5%;
+    color: black !important;
 }
 
 .pl-20percent{
