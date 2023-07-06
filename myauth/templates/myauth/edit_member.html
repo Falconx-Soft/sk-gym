@@ -7,6 +7,9 @@
     .full-width textarea {
         width: 100%;
     }
+    #id_is_fee_paid{
+        /* display: none; */
+    }
 </style>
 <!-- main -->
 <main class="container pl-0">
@@ -45,5 +48,8 @@
 
 </main>
 <!-- ./main -->
+<script>
+    $('#id_is_fee_paid').parent().parent().parent().parent().addClass('d-none')
+</script>
 
 {% endblock %}

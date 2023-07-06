@@ -150,26 +150,31 @@ def registerNewUser(request):
             newUser.username = user.username
             newUser.phone = user.phone
             today = datetime.now()
-            
+            is_fee_paid = user.is_fee_paid
             profile_picture = request.FILES.get('profile_pic')
             try:
                 if profile_picture:
                     newUser.profile_pic = profile_picture
-                newUser.fee_amount = user.fee_amount
+                
                 if user.fee_amount:
+                    newUser.fee_amount = user.fee_amount                           
+                else:
+                    newUser.fee_amount = 0.0
+                
+                if is_fee_paid:
                     newUser.is_fee_paid = True
                     newUser.is_active=True
                     newUser.fee_paid_date = today
                     due_date = today + relativedelta(months=1)
                     newUser.due_date = due_date
-                    
-                else:
-                    newUser.fee_amount = 0.0
+                    newUser.fee_paid_by = request.user
 
                 if user.blood_group:
                     newUser.blood_group=user.blood_group
                 else:
                     newUser.blood_group=""
+                
+                newUser.added_by = request.user
                 newUser.save()
                 revenue = Revenue(user=newUser, fee_amount=newUser.fee_amount, submission_date=today)
                 revenue.save()
@@ -185,7 +190,7 @@ def registerNewUser(request):
             messages.error(request, "An error occurred during registration..")
     else:
         form = MemberForm()
-
+    print('Form------', form)
     context = {'form': form}
     return render(request, 'myauth/registerNewUser.html', context)
 
@@ -232,6 +237,8 @@ def getFeePaid(request,pk):
             member.fee_paid_amount=fee_amount
         elif member.fee_paid_amount:
             member.fee_paid_amount=0.0
+        member.fee_paid_by = request.user
+        member.added_by = request.user
         member.save()
         revenue = Revenue(user=member, fee_amount=member.fee_amount, submission_date=today)
         revenue.save()
@@ -243,7 +250,7 @@ def getFeePaid(request,pk):
 @login_required(login_url="loginPage")
 def deleteMember(request, pk):
     member=User.objects.get(id=pk)
-    member.delete
+    # member.delete
     if request.method=="POST":
         member.delete()
         return redirect("home")
@@ -309,20 +316,20 @@ def edit_member(request, instance_id):
         if form.is_valid():
             form.save()
     form = MemberForm(instance=instance)
-    member=User.objects.get(id=instance_id)
-    if member.fee_amount and member.fee_amount != '0.0':
-        print('Fees Paid')
-        today = datetime.now()
-        member.is_fee_paid=True
-        member.is_active=True
-        member.fee_paid_date=timezone.now()
-        if member.due_date is not None:
-            due_date=member.due_date
-            due_date = due_date + relativedelta(months=1)
-        else:
-            due_date = today + relativedelta(months=1)
-        member.due_date=due_date
-        member.save()
+    # member=User.objects.get(id=instance_id)
+    # if member.fee_amount and member.fee_amount != '0.0':
+    #     print('Fees Paid')
+    #     today = datetime.now()
+    #     member.is_fee_paid=True
+    #     member.is_active=True
+    #     member.fee_paid_date=timezone.now()
+    #     if member.due_date is not None:
+    #         due_date=member.due_date
+    #         due_date = due_date + relativedelta(months=1)
+    #     else:
+    #         due_date = today + relativedelta(months=1)
+    #     member.due_date=due_date
+    #     member.save()
     context = {
         'form': form,
         'instance': instance,

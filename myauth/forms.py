@@ -13,7 +13,7 @@ class UserForm (forms.ModelForm):
 class MemberForm (forms.ModelForm):
     class Meta:
         model=User
-        fields=['username', 'phone', 'email', 'blood_group', 'fee_amount', 'profile_pic']
+        fields=['username', 'phone', 'email', 'blood_group', 'fee_amount','is_fee_paid', 'profile_pic']
 
 
 class DateRangeForm(forms.Form):

@@ -21,6 +21,8 @@ class User(AbstractUser):
     is_active=models.BooleanField(default=False)
     is_fee_paid=models.BooleanField(default=False)
     is_staff=models.BooleanField(default=False)
+    added_by = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='Member_added_by')
+    fee_paid_by = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='fees_paid_by')
 
 
     USERNAME_FIELD='email'
@@ -29,7 +31,7 @@ class User(AbstractUser):
     objects = CustomUserManager()
 
     def __str__(self):
-        return self.email
+        return str(self.email)
     
 class Revenue(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -37,5 +39,5 @@ class Revenue(models.Model):
     submission_date = models.DateField(default=timezone.now)
 
     def __str__(self):
-        return self.fee_amount
+        return str(self.fee_amount)
 

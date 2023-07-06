@@ -1,4 +1,6 @@
-{% extends 'main.html' %} {% load static %} {% block content %}
+{% extends 'main.html' %} 
+{% load static %}
+{% block content %}
 
 <!-- main -->
 <main class="container pl-0">
@@ -20,7 +22,9 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <div class="form-control-user">{{field}}</div>
+                        <div class="form-control-user">
+                              {{ field }}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -37,5 +41,9 @@
 
 </main>
 <!-- ./main -->
-
+<script>
+  $(document).ready(function() {
+        $('#id_fee_amount').attr('required', 'required');
+    });
+</script>
 {% endblock %}

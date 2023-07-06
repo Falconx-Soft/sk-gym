@@ -19,7 +19,7 @@
     <img src="{% static 'images/unknown_profile_pic.jpg' %}"  class="card-img-top member-card-image"  alt="Profile Picture"/>
     {% endif %}
     <hr />
-    <div class="member-details" onclick="window.location.href='{% url 'edit_member' member.id %}'">
+    <div class="member-details" >
       <div>
         <h5 class="member-name">Member Name: {{ member.username }}</h5>
         <p class="member-email">Email: {{ member.email }}</p>
