@@ -29,6 +29,8 @@
         <p class="member-fee">Fee Paid: {% if member.is_fee_paid %}&#10004;{% else %}&#10006;{% endif %}</p>
         <p class="member-active">Active: {% if member.is_active %}&#10004;{% else %}&#10006;{% endif %}</p>
         <p class="member-date">Date: {{ member.due_date }}</p>
+        <p class="member-addedby">Added By: {{ member.added_by.email }}</p>
+        <p class="member-markedpaid">Marked Paid: {{ member.marked_paid_by.email }}</p>
   
       </div>
 
