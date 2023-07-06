@@ -35,7 +35,7 @@
       <div class="delete-button-container">
         <form method="POST" action="{% url 'getFeePaid' member.id %}">
           {% csrf_token %}
-          <input type="number" name="fee_amount" class="fee_amount_input" placeholder="Enter Fee Amount" required>
+          <input type="number" name="fee_amount" class="fee_amount_input" placeholder="Enter Fee Amount" value="{{ member.fee_amount }}" required>
           <button type="submit" class="btn btn-primary btn-user btn-block">Mark Fee Paid</button>
         </form>
       </div>

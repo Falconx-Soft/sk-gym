@@ -167,7 +167,7 @@ def registerNewUser(request):
                     newUser.fee_paid_date = today
                     due_date = today + relativedelta(months=1)
                     newUser.due_date = due_date
-                    newUser.fee_paid_by = request.user
+                    newUser.marked_paid_by = request.user
 
                 if user.blood_group:
                     newUser.blood_group=user.blood_group
@@ -237,7 +237,7 @@ def getFeePaid(request,pk):
             member.fee_paid_amount=fee_amount
         elif member.fee_paid_amount:
             member.fee_paid_amount=0.0
-        member.fee_paid_by = request.user
+        member.marked_paid_by = request.user
         member.added_by = request.user
         member.save()
         revenue = Revenue(user=member, fee_amount=member.fee_amount, submission_date=today)

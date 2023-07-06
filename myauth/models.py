@@ -22,7 +22,7 @@ class User(AbstractUser):
     is_fee_paid=models.BooleanField(default=False)
     is_staff=models.BooleanField(default=False)
     added_by = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='Member_added_by')
-    fee_paid_by = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='fees_paid_by')
+    marked_paid_by = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
 
 
     USERNAME_FIELD='email'
