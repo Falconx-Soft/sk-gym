@@ -16,6 +16,7 @@
       padding: 5px !important;
       border-radius: 5px;
       box-shadow: 0 0 10px rgba(0, 0, 255, 0.1);
+      cursor: pointer;
   }
 
   .member-card h3 {
@@ -229,4 +230,33 @@ main{
 .back_btn:hover{
   color: #040b14 !important; 
   text-decoration: none !important;
+}
+
+.form-control-checkbox {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  margin: 0;
+  vertical-align: middle;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-control-checkbox:checked {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.form-control-checkbox:focus {
+  outline: none;
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.table_thead{
+  background: #149ddd;
+  color: white;
 }

@@ -52,6 +52,8 @@
 <!-- ./main -->
 <script>
     $('#id_is_fee_paid').parent().parent().parent().parent().addClass('d-none')
+    $('input[type="text"], input[type="number"], input[type="email"], input[type="file"]').addClass('form-control')
+    $('input[type="checkbox"]').addClass('form-control-checkbox')
 </script>
 
 {% endblock %}

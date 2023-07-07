@@ -86,7 +86,8 @@ def loginPage(request):
         user = User.objects.get(email=email)
         print("data  email is "+user.email)
         print("data password is "+user.password)
-        user = authenticate(email=email, password=password)
+        user_obj = User.objects.get(email=email)
+        user = authenticate(email=user_obj.email, password=password)
         print(user)
         if user is not None:
             login(request, user)
@@ -167,7 +168,9 @@ def registerNewUser(request):
                     newUser.fee_paid_date = today
                     due_date = today + relativedelta(months=1)
                     newUser.due_date = due_date
-                    newUser.marked_paid_by = request.user
+                    revenue = Revenue(user=newUser, fee_amount=newUser.fee_amount, submission_date=today, marked_paid_by = request.user)
+                    revenue.save()
+                    
 
                 if user.blood_group:
                     newUser.blood_group=user.blood_group
@@ -176,8 +179,7 @@ def registerNewUser(request):
                 
                 newUser.added_by = request.user
                 newUser.save()
-                revenue = Revenue(user=newUser, fee_amount=newUser.fee_amount, submission_date=today)
-                revenue.save()
+                
                 if newUser is not None:
                     
                     return redirect('home')
@@ -233,14 +235,15 @@ def getFeePaid(request,pk):
         else:
             due_date = today + relativedelta(months=1)
         member.due_date=due_date
-        if fee_amount is not None:
-            member.fee_paid_amount=fee_amount
-        elif member.fee_paid_amount:
-            member.fee_paid_amount=0.0
-        member.marked_paid_by = request.user
+        # if fee_amount is not None:
+        #     member.fee_paid_amount=fee_amount
+        # elif member.fee_paid_amount:
+        #     member.fee_paid_amount=0.0
+        
         member.added_by = request.user
         member.save()
-        revenue = Revenue(user=member, fee_amount=member.fee_amount, submission_date=today)
+        revenue = Revenue(user=member, fee_amount=fee_amount, submission_date=today)
+        revenue.marked_paid_by = request.user
         revenue.save()
         
 
@@ -264,22 +267,25 @@ def dueMembers(request):
     today_date = timezone.now().date()
     members=User.objects.all()
     for member in members:
-        due_date = member.due_date
-        if due_date is not None or member.is_fee_paid == 0:
-                if due_date:
-                    two_days_before_due_date = due_date - timedelta(days=2)
-                    if today_date >= two_days_before_due_date:
-                        print('Hello, you have to pay the fee: ' + member.username)
-                        if today_date >= due_date:
-                            member.is_active = False
-                            member.is_fee_paid = False
+        if not member.is_staff:
+            due_date = member.due_date
+            if due_date is not None or member.is_fee_paid == 0:
+                    if due_date:
+                        two_days_before_due_date = due_date - timedelta(days=2)
+                        if today_date >= two_days_before_due_date:
+                            print('Hello, you have to pay the fee: ' + member.username)
+                            if today_date >= due_date:
+                                member.is_active = False
+                                member.is_fee_paid = False
+                                due_members.append(member)
+                            
+                        else:
+                            pass
+                    if member.is_fee_paid == 0:
+                        if members not in due_members:
                             due_members.append(member)
-                        
-                    else:
-                        pass
-                if member.is_fee_paid == 0:
-                    if members not in due_members:
-                        due_members.append(member)
+        
+    
     paginator = Paginator(due_members, 8)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -335,3 +341,28 @@ def edit_member(request, instance_id):
         'instance': instance,
     }
     return render(request, 'myauth/edit_member.html', context)
+
+def revenue_list(request):
+    revenue_list = Revenue.objects.all()
+    if request.method == 'POST':
+        print('POST REQUEST')
+        search_revenue_list = []
+        query = request.POST.get('query')
+        print('query', query)
+        users = User.objects.all()
+        users = users.filter(
+            Q(id__icontains=query) |
+            Q(phone__icontains=query) |
+            Q(fee_amount__icontains=query) |
+            Q(email__icontains=query) |
+            Q(username__icontains=query)
+        )
+        for user in users:
+            revenue_list = Revenue.objects.filter(user= user)
+            for revenue in revenue_list:
+                if not revenue in search_revenue_list:
+                    search_revenue_list.append(revenue)
+        context = {'revenue_list': search_revenue_list,'query': query}
+        return render(request, 'myauth/revenue_list.html', context)
+    context = {'revenue_list': revenue_list }
+    return render(request, 'myauth/revenue_list.html', context)

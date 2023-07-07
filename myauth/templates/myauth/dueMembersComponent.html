@@ -14,9 +14,9 @@
 
   <div class="member-card">
     {% if member.profile_pic %}
-    <img src="{{ member.profile_pic.url }}"  class="card-img-top member-card-image"  alt="Profile Picture"/>
+    <img src="{{ member.profile_pic.url }}"  class="card-img-top member-card-image" onclick="window.location.href='{% url 'edit_member' member.id %}'" alt="Profile Picture"/>
     {% else %}
-    <img src="{% static 'images/unknown_profile_pic.jpg' %}"  class="card-img-top member-card-image"  alt="Profile Picture"/>
+    <img src="{% static 'images/unknown_profile_pic.jpg' %}"  class="card-img-top member-card-image" onclick="window.location.href='{% url 'edit_member' member.id %}'" alt="Profile Picture"/>
     {% endif %}
     <hr />
     <div class="member-details" >
@@ -30,7 +30,6 @@
         <p class="member-active">Active: {% if member.is_active %}&#10004;{% else %}&#10006;{% endif %}</p>
         <p class="member-date">Date: {{ member.due_date }}</p>
         <p class="member-addedby">Added By: {{ member.added_by.email }}</p>
-        <p class="member-markedpaid">Marked Paid: {{ member.marked_paid_by.email }}</p>
   
       </div>
 

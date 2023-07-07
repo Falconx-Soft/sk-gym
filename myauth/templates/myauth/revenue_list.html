@@ -1,0 +1,53 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<!-- main -->
+<main class="container pl-0">
+    <h1 class="h1 text-gray-900 mb-4 text-center" style="padding-top: 5%; color: #149ddd  !important;">
+        Shapes In Gym ! <br /><small style="color: #149ddd">Sweat more, bleed less!.</small>
+    </h1>
+    <div class="panel panel-default mb-4">
+        <div class="panel-body">
+            <form method="POST" action="{% url 'revenue_list' %}" class="search-form justify-content-end">
+                {% csrf_token %}
+                <div class="input-group-custom">
+                    <input type="text" name="query" placeholder="Search member" class="form-control" {% if query %}
+                        value="{{ query }}" {% endif %} />
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row text-center justify-content-center pl-4 mx-0 mt-5">
+
+        <table class="table">
+            <thead class="table_thead">
+              <tr>
+                <th>User</th>
+                <th>Marked Paid By</th>
+                <th>Fee Amount</th>
+                <th>Submission Date</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for revenue in revenue_list %}
+                <tr>
+                    <td>{{revenue.user.email}}</td>
+                    <td>{{revenue.marked_paid_by.email}}</td>
+                    <td>PKR {{revenue.fee_amount}}</td>
+                    <td>{{revenue.submission_date}}</td>
+                </tr>
+                {% endfor %}
+              <!-- Add more rows as needed -->
+            </tbody>
+          </table>
+          
+    </div>
+
+</main>
+
+
+{% endblock %}

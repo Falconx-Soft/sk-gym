@@ -12,4 +12,5 @@ urlpatterns=[
     path('dueMembers/', dueMembers, name="dueMembers"),
     path('bloodGroup/', bloodGroup, name="bloodGroup"),
     path('edit_member/<int:instance_id>/', edit_member, name='edit_member'),
+    path('revenue_list/', revenue_list, name="revenue_list"),
 ]
