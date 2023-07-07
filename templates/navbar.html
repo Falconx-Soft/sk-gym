@@ -30,7 +30,7 @@
 >
   <!-- Sidebar - Brand -->
   <div class="profile mb-2">
-    <img src="../static/images/unknown_profile_pic.jpg" alt="" class="img-fluid rounded-circle">
+    <img src="{% static 'images/unknown_profile_pic.jpg' %}" alt="" class="img-fluid rounded-circle">
     <h1 class="text-white"><a href="{% url 'home' %}" class="text-white">{{request.user.username|title}}</a></h1>
     
   </div>
