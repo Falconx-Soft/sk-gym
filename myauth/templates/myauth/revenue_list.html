@@ -4,9 +4,7 @@
 
 <!-- main -->
 <main class="container pl-0">
-    <h1 class="h1 text-gray-900 mb-4 text-center" style="padding-top: 5%; color: #149ddd  !important;">
-        Shapes In Gym ! <br /><small style="color: #149ddd">Sweat more, bleed less!.</small>
-    </h1>
+    {% include 'myauth/hero.html' %}
     <div class="panel panel-default mb-4">
         <div class="panel-body">
             <form method="POST" action="{% url 'revenue_list' %}" class="search-form justify-content-end">

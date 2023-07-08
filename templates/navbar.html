@@ -5,10 +5,11 @@
     display: block;
     width: 120px;
     border: 8px solid #2c2f3f;
+    object-fit: cover;
 }
 .img-fluid {
     max-width: 100%;
-    height: auto;
+    height: 120px;
 }
 .profile h1 {
     font-size: 24px;
@@ -30,7 +31,11 @@
 >
   <!-- Sidebar - Brand -->
   <div class="profile mb-2">
+    {% if request.user.profile_pic %}
+    <img src="{{ request.user.profile_pic.url }}" alt="" class="img-fluid rounded-circle">
+    {% else %}
     <img src="{% static 'images/unknown_profile_pic.jpg' %}" alt="" class="img-fluid rounded-circle">
+    {% endif %}
     <h6 class="text-white text-center"><a href="{% url 'home' %}" class="text-white">{{request.user.email}}</a></h6>
     
   </div>
