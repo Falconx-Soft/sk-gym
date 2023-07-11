@@ -260,3 +260,19 @@ main{
   background: #149ddd;
   color: white;
 }
+.error_message{
+  /* position: absolute; */
+  /* top: 2px; */
+  width: fit-content;
+  padding: 10px;
+  color: red;
+  background: #eef2f1;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 255, 0.1);
+}
+.error_message_block{
+  top: 5px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}

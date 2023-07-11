@@ -45,22 +45,9 @@ def home(request):
     for member in users:
         if not member.is_staff:
             members.append(member)
-            due_date = member.due_date
-            if due_date is not None or member.is_fee_paid == 0:
-                if due_date:
-                    two_days_before_due_date = due_date - timedelta(days=2)
-                    if today_date >= two_days_before_due_date:
-                        print('Hello, you have to pay the fee: ' + member.username)
-                        if today_date >= due_date:
-                            member.is_active = False
-                            member.is_fee_paid = False
-                            due_members.append(member)
-                        
-                    else:
-                        print('Hello, it\'s time to pay the fee: ' + member.username)
-                if member.is_fee_paid == 0:
-                    if members not in due_members:
-                        due_members.append(member)
+            
+            if not member.is_fee_paid:
+                due_members.append(member)
     print('Total members are: ')
     print(len(members))
     print(len(due_members))
@@ -137,14 +124,16 @@ def logoutPage(request):
 #     return render(request, 'myauth/registerNewUser.html', context)
 @login_required(login_url="loginPage")
 def registerNewUser(request):
+    error = None
     if request.method == 'POST':
         form = MemberForm(request.POST, request.FILES)
         print('before valid stage ')
         # print(form)
-
+        
         if form.is_valid():
             print('inside valid stage ')
             user = form.save(commit=False)
+            print('User Due Date',user.due_date)
             # user.username = user.username.lower()
             email = user.email.lower()
             newUser = User.objects.create_user(email=email, password=None)
@@ -161,13 +150,13 @@ def registerNewUser(request):
                     newUser.fee_amount = user.fee_amount                           
                 else:
                     newUser.fee_amount = 0.0
-                
+            
+                due_date = user.due_date
+                newUser.due_date = due_date
                 if is_fee_paid:
                     newUser.is_fee_paid = True
                     newUser.is_active=True
                     newUser.fee_paid_date = today
-                    due_date = today + relativedelta(months=1)
-                    newUser.due_date = due_date
                     revenue = Revenue(user=newUser, fee_amount=newUser.fee_amount, submission_date=today, marked_paid_by = request.user)
                     revenue.save()
                     
@@ -189,11 +178,12 @@ def registerNewUser(request):
                 # You can also log the exception for debugging purposes
                 # logger.error("Error occurred during registration: {}".format(str(e)))
         else:
+            error = 'User already Exist'
             messages.error(request, "An error occurred during registration..")
     else:
         form = MemberForm()
-    print('Form------', form)
-    context = {'form': form}
+    # print('Form------', form)
+    context = {'form': form, 'error':error}
     return render(request, 'myauth/registerNewUser.html', context)
 
 
@@ -223,18 +213,19 @@ def reports(request):
 @login_required(login_url="loginPage")
 def getFeePaid(request,pk):
     if request.method == 'POST':
+        print('Get fee Paid')
         today = datetime.now()
         fee_amount = request.POST.get('fee_amount')        
         member=User.objects.get(id=pk)
         member.is_fee_paid=True
         member.is_active=True
         member.fee_paid_date=timezone.now()
-        if member.due_date is not None:
-            due_date=member.due_date
-            due_date = due_date + relativedelta(months=1)
-        else:
-            due_date = today + relativedelta(months=1)
-        member.due_date=due_date
+        # if member.due_date is not None:
+        #     due_date=member.due_date
+        #     due_date = due_date + relativedelta(months=1)
+        # else:
+        #     due_date = today + relativedelta(months=1)
+        # member.due_date=due_date
         # if fee_amount is not None:
         #     member.fee_paid_amount=fee_amount
         # elif member.fee_paid_amount:
@@ -267,23 +258,11 @@ def dueMembers(request):
     today_date = timezone.now().date()
     members=User.objects.all()
     for member in members:
+        
         if not member.is_staff:
-            due_date = member.due_date
-            if due_date is not None or member.is_fee_paid == 0:
-                    if due_date:
-                        two_days_before_due_date = due_date - timedelta(days=2)
-                        if today_date >= two_days_before_due_date:
-                            print('Hello, you have to pay the fee: ' + member.username)
-                            if today_date >= due_date:
-                                member.is_active = False
-                                member.is_fee_paid = False
-                                due_members.append(member)
-                            
-                        else:
-                            pass
-                    if member.is_fee_paid == 0:
-                        if members not in due_members:
-                            due_members.append(member)
+            print(member.is_fee_paid)
+            if not member.is_fee_paid:
+                due_members.append(member)
         
     
     paginator = Paginator(due_members, 8)

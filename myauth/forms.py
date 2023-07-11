@@ -11,9 +11,11 @@ class UserForm (forms.ModelForm):
 
 
 class MemberForm (forms.ModelForm):
+    due_date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}), required=True)
+
     class Meta:
         model=User
-        fields=['username', 'phone', 'email', 'blood_group', 'fee_amount','is_fee_paid', 'profile_pic']
+        fields=['username', 'phone', 'email', 'blood_group', 'fee_amount','is_fee_paid', 'profile_pic', 'due_date']
 
 
 class DateRangeForm(forms.Form):
